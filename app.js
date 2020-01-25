@@ -7,6 +7,12 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//azure app insight linkup
+var appInsights = require('applicationinsights');
+appInsights.setup('c664a96e-e368-4ae5-b386-be23da5efcd6');
+appInsights.start();
+//-----
+
 var app = express();
 
 // view engine setup
@@ -27,11 +33,19 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+//app insight
+app.use('/problem', function() {
+throw new Error('Something is wrong');
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  //app insight
+  appInsights.defaultClient.trackException({exception: err});
 
   // render the error page
   res.status(err.status || 500);
