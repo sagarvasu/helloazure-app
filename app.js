@@ -29,12 +29,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-appInsights.use(function(req, res, next) {
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
 //app insight
-app.use('/problem', function() {
+appInsights.use('/problem', function() {
 throw new Error('Something is wrong');
 });
 
