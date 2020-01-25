@@ -34,8 +34,8 @@ app.use(function(req, res, next) {
 });
 
 //app insight
-appInsights.use('/problem', function() {
-throw new Error('Something is wrong');
+app.use('/problem', function() {
+  throw new Error('Something is wrong');
 });
 
 // error handler
