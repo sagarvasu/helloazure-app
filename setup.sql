@@ -1,0 +1,9 @@
+CREATE USER dbuser1 WITH PASSWORD='$sagar12Vasu$'
+
+CREATE TABLE Users(
+    Id INT IDENTITY PRIMARY KEY,
+    Name NVARCHAR(255),
+    Email NVARCHAR(255)
+)
+
+SELECT * FROM Users
